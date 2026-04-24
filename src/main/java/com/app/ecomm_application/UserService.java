@@ -1,10 +1,10 @@
 package com.app.ecomm_application;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -15,17 +15,15 @@ public class UserService {
         return userList;
     }
 
-    public User fetchUser(Long id){
-        for (User user:userList){
-            if(user.getId().equals(id)){
-                return user;
-            }
-        }
-        return null;
+    public Optional<User> fetchUser(Long id){
+        return userList.stream()
+                .filter(user->user.getId().equals(id))
+                .findFirst();
+
+
     }
 
-    public List<User> addUser(User user){
+    public void addUser(User user){
         userList.add(user);
-        return userList;
     }
 }
