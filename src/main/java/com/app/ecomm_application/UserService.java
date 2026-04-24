@@ -23,6 +23,18 @@ public class UserService {
 
     }
 
+    public boolean updateUser(Long id, User updateDetails){
+        return userList.stream()
+                .filter(user -> user.getId().equals(id))
+                .findFirst()
+                .map(user -> {
+                    user.setFirstName(updateDetails.getFirstName());
+                    user.setLastName(updateDetails.getLastName());
+                    return true;
+                })
+                .orElse(false);
+    }
+
     public void addUser(User user){
         userList.add(user);
     }
