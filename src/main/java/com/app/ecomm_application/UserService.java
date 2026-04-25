@@ -1,41 +1,35 @@
 package com.app.ecomm_application;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    private final List<User> userList=new ArrayList<>();
-
+    private final UserRepository userRepository;
 
     public List<User> fetchAllUsers(){
-        return userList;
+        return userRepository.findAll();
     }
 
     public Optional<User> fetchUser(Long id){
-        return userList.stream()
-                .filter(user->user.getId().equals(id))
-                .findFirst();
-
-
+        return userRepository.findById(id);
     }
 
     public boolean updateUser(Long id, User updateDetails){
-        return userList.stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst()
+        return userRepository.findById(id)
                 .map(user -> {
-                    user.setFirstName(updateDetails.getFirstName());
-                    user.setLastName(updateDetails.getLastName());
-                    return true;
+                user.setFirstName(updateDetails.getFirstName());
+                user.setLastName(updateDetails.getLastName());
+                return true;
                 })
                 .orElse(false);
     }
 
     public void addUser(User user){
-        userList.add(user);
+        userRepository.save(user);
     }
 }
