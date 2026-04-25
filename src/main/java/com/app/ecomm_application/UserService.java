@@ -13,6 +13,7 @@ public class UserService {
 
     public List<User> fetchAllUsers(){
         return userRepository.findAll();
+
     }
 
     public Optional<User> fetchUser(Long id){
@@ -24,6 +25,7 @@ public class UserService {
                 .map(user -> {
                 user.setFirstName(updateDetails.getFirstName());
                 user.setLastName(updateDetails.getLastName());
+                userRepository.save(user);
                 return true;
                 })
                 .orElse(false);
