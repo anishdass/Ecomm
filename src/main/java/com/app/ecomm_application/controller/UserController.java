@@ -1,5 +1,7 @@
-package com.app.ecomm_application;
+package com.app.ecomm_application.controller;
 
+import com.app.ecomm_application.service.UserService;
+import com.app.ecomm_application.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
