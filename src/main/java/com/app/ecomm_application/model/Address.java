@@ -3,13 +3,10 @@ package com.app.ecomm_application.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "adresses")
+@Entity(name = "addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +18,5 @@ public class Address {
     private String country;
     private String zipcode;
 
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Address address;
 
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 }
