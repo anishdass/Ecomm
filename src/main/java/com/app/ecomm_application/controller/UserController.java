@@ -30,7 +30,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User userDetails){
-        boolean updated= userService.updateUser(id, userDetails);
+        boolean updated = userService.updateUser(id, userDetails);
         return updated
                 ? ResponseEntity.ok("User updated successfully")
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
