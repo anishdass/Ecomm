@@ -32,11 +32,22 @@ public class ProductController {
     }
 
 //    Getting all products
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts(){
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
 //    Deleting the product
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        boolean deleted = productService.deleteProduct(id);
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+
+        }
+    }
+
 //    Searching a product
 }
