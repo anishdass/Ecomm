@@ -30,21 +30,20 @@ public class UserService {
                 .map(this::mapToUserResponse);
     }
 
-    public boolean updateUser(Long id, User updateDetails){
-        return userRepository.findById(id)
-                .map(user -> {
-                user.setFirstName(updateDetails.getFirstName());
-                user.setLastName(updateDetails.getLastName());
-                userRepository.save(user);
-                return true;
-                })
-                .orElse(false);
-    }
-
     public void addUser(UserRequest userRequest){
         User user = new User();
         updateUserFromRequest(user, userRequest);
         userRepository.save(user);
+    }
+
+    public boolean updateUser(Long id, UserRequest updateDetails){
+        return userRepository.findById(id)
+                .map(user -> {
+                    updateUserFromRequest(user, updateDetails);
+                    userRepository.save(user);
+                    return true;
+                })
+                .orElse(false);
     }
 
     private void updateUserFromRequest(User user, UserRequest userRequest){

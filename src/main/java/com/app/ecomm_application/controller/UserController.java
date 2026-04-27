@@ -3,7 +3,6 @@ package com.app.ecomm_application.controller;
 import com.app.ecomm_application.dto.UserRequest;
 import com.app.ecomm_application.dto.UserResponse;
 import com.app.ecomm_application.service.UserService;
-import com.app.ecomm_application.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User userDetails){
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody UserRequest userDetails){
         boolean updated = userService.updateUser(id, userDetails);
         return updated
                 ? ResponseEntity.ok("User updated successfully")
