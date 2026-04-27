@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/products")
@@ -28,4 +30,13 @@ public class ProductController {
                         .notFound()
                         .build());
     }
+
+//    Getting all products
+    @GetMapping()
+    public ResponseEntity<List<ProductResponse>> getAllProducts(){
+        return ResponseEntity.ok(productService.getAllProducts());
+    }
+
+//    Deleting the product
+//    Searching a product
 }
