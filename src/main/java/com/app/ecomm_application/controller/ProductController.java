@@ -22,7 +22,7 @@ public class ProductController {
         return new ResponseEntity<>(productService.createProduct(productRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/search")
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         return productService.updateProduct(id, productRequest)
                 .map(ResponseEntity::ok)
@@ -50,4 +50,9 @@ public class ProductController {
     }
 
 //    Searching a product
+    @GetMapping("/{id}")
+    public ResponseEntity<List<ProductResponse>> searchProducts(@RequestParam String keyword){
+        return ResponseEntity.ok(productService.searchProducts(keyword));
+
+    }
 }
