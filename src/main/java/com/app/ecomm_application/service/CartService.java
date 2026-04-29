@@ -91,8 +91,14 @@ public class CartService {
         CartItemResponse cartItemResponse=new CartItemResponse();
         cartItemResponse.setUser(cartItem.getUser());
         cartItemResponse.setProduct(cartItem.getProduct());
-        cartItemResponse.setQuantity(cartItemResponse.getQuantity());
+        cartItemResponse.setQuantity(cartItem.getQuantity());
         cartItemResponse.setPrice(cartItem.getPrice());
         return cartItemResponse;
+    }
+
+    public void clearCart(String userId) {
+        userRepository.findById(Long.valueOf(userId)).ifPresent(
+                cartItemRepository::deleteByUser
+        );
     }
 }
